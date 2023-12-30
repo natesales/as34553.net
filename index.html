@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AS34553</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<img src="as34553.png" alt="AS34553">
+
+<p>
+    AS34553 is the primary autonomous system operated by <a href="https://natesales.net">Nate Sales</a>. I have an
+    open peering policy. See <a href="https://peeringdb.com/asn/34553">AS34553 on PeeringDB</a> for more
+    information.
+</p>
+
+<h2>Default Local Preferences</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Category</th>
+        <th>Pref</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Transit</td>
+        <td>80</td>
+    </tr>
+    <tr>
+        <td>IXP Route Server</td>
+        <td>90</td>
+    </tr>
+    <tr>
+        <td>Direct Peer</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>Customer</td>
+        <td>200</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2>Info Communities</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Community</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>34553:10:1</td>
+        <td>Locally originated</td>
+    </tr>
+    <tr>
+        <td>34553:10:2</td>
+        <td>Learned from transit</td>
+    </tr>
+    <tr>
+        <td>34553:10:3</td>
+        <td>Learned from IXP route server</td>
+    </tr>
+    <tr>
+        <td>34553:10:4</td>
+        <td>Learned from direct peer</td>
+    </tr>
+    <tr>
+        <td>34553:10:5</td>
+        <td>Learned from customer</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Action Communities</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Community</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+        <td>34553:20:x</td>
+        <td>Don't export to ASx</td>
+    </tr>
+    <tr>
+        <td>34553:21:1</td>
+        <td>Prepend once</td>
+    </tr>
+    <tr>
+        <td>34553:21:2</td>
+        <td>Prepend twice</td>
+    </tr>
+    <tr>
+        <td>34553:21:3</td>
+        <td>Prepend three times</td>
+    </tr>
+    <tr>
+        <td>34553:22:70</td>
+        <td>Set local pref to 70 (lower than transit)</td>
+    </tr>
+    <tr>
+        <td>34553:22:100</td>
+        <td>Set local pref to 100 (same as peers)</td>
+    </tr>
+    <tr>
+        <td>65535:65281</td>
+        <td>RFC1997 NO_EXPORT</td>
+    </tr>
+    <tr>
+        <td>65535:65282</td>
+        <td>RFC1997 NO_ADVERTISE</td>
+    </tr>
+    <tr>
+        <td>65535:65283</td>
+        <td>RFC1997 NO_EXPORT_SUBCONFED</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+html {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+body {
+	max-width: 800px;
+	margin: 25px auto;
+}
+
+table {
+	border-collapse: collapse;
+	margin-bottom: 10px;
+	table-layout: fixed;
+}
+
+table caption {
+	text-align: left;
+}
+
+td,
+th {
+	padding: 6px;
+	text-align: left;
+	vertical-align: top;
+	word-wrap: break-word;
+}
+
+thead {
+	border-bottom: 1px solid #dbdbdb;
+}
+
+tfoot {
+	border-top: 1px solid #dbdbdb;
+}
+
+tbody tr:nth-child(even) {
+	background-color: #efefef;
+}
+
+img {
+	width: 400px;
+}

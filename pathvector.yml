@@ -1,0 +1,78 @@
+origin-communities: [ "34553:10:1" ]
+
+global-config: |
+  function as34553_in() {
+    # Prepends
+    if ((34553,21,1) ~ bgp_large_community) then {
+      bgp_path.prepend(ASN);
+    }
+    if ((34553,21,2) ~ bgp_large_community) then {
+      bgp_path.prepend(ASN);
+      bgp_path.prepend(ASN);
+    }
+    if ((34553,21,3) ~ bgp_large_community) then {
+      bgp_path.prepend(ASN);
+      bgp_path.prepend(ASN);
+      bgp_path.prepend(ASN);
+    }
+
+    # Local pref
+    if ((34553,22,70) ~ bgp_large_community) then {
+      bgp_local_pref = 70;
+    } else if ((34553,22,100) ~ bgp_large_community) then {
+      bgp_local_pref = 100;
+    }
+  }
+
+  function as34553_out(int peer_asn) {
+    if ((34553,20,peer_asn) ~ bgp_large_community) then {
+      _reject("No export to AS set, not exporting");
+    }
+  }
+
+templates:
+  upstream:
+    allow-local-as: true
+    announce: [ "34553:10:5" ]
+    remove-communities: [ "34553:10:1", "34553:10:2", "34553:10:3", "34553:10:4", "34553:10:5" ]
+    local-pref: 80
+    add-on-import: [ "34553:10:2" ]
+    pre-import: as34553_in();
+    pre-export: as34553_out(<pathvector.asn>);
+
+  routeserver:
+    filter-transit-asns: true
+    auto-import-limits: true
+    enforce-peer-nexthop: false
+    enforce-first-as: false
+    announce: [ "34553:10:5" ]
+    remove-communities: [ "34553:10:1", "34553:10:2", "34553:10:3", "34553:10:4", "34553:10:5" ]
+    local-pref: 90
+    add-on-import: [ "34553:10:3" ]
+    pre-export: as34553_out(<pathvector.asn>);
+
+  peer:
+    filter-irr: true
+    filter-transit-asns: true
+    auto-import-limits: true
+    auto-as-set: true
+    announce: [ "34553:10:5" ]
+    remove-communities: [ "34553:10:1", "34553:10:2", "34553:10:3", "34553:10:4", "34553:10:5" ]
+    local-pref: 100
+    add-on-import: [ "34553:10:4" ]
+    pre-import: as34553_in();
+    pre-export: as34553_out(<pathvector.asn>);
+
+  downstream:
+    filter-irr: true
+    allow-blackhole-community: true
+    filter-transit-asns: true
+    auto-import-limits: true
+    auto-as-set: true
+    announce-default: true
+    announce: [ "34553:10:2", "34553:10:3", "34553:10:4", "34553:10:5" ]
+    remove-communities: [ "34553:10:1", "34553:10:2", "34553:10:3", "34553:10:4", "34553:10:5" ]
+    local-pref: 200
+    add-on-import: [ "34553:10:5" ]
+    pre-import: as34553_in();
+    pre-export: as34553_out(<pathvector.asn>);
